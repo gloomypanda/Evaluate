@@ -28,6 +28,18 @@ function extension_check(){
   return 0
 }
 
+function check_for_input_output(){
+  if test -e ./"$inputfile"; then
+    if test -e ./"$answerfile"; then
+      return 0
+    else
+      echo "Error : Not exist answer.txt in this directory"
+    fi
+  else
+    echo "Error : Not exist input.txt in this directory"
+  fi
+  return 1
+}
 
 # This function basically compiles the files according to their extension
 function subscript_of_verdict(){
@@ -73,6 +85,10 @@ function subscript_of_verdict(){
   fi
   echo "$flag"                                                                # Return com which actually represents the subscript of output_to_be_displayed
 }
+
+if ! check_for_input_output; then
+	exit 0
+fi
 
 
 for file in *                                                               #Looping through all the files of the folder
