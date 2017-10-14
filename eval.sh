@@ -4,7 +4,11 @@
 declare input="input.txt"                                                
 declare answer="answer.txt"
 declare -a extensions_to_be_allowed=("c" "cpp" "java" "py")
+if [ "$(uname)" == "Linux" ]; then
 declare -a output_to_be_displayed=( "\x1B[92mWhoaa! Correct answer :)\x1B[39m" "\x1B[91mOopsie, Wrong answer :(\x1B[39m" "\x1B[94mCompile Error o.O\x1B[39m" )
+else
+declare -a output_to_be_displayed=( "\e[92mWhoaa! Correct answer :)\e[39m" "\e[91mOopsie, Wrong answer :(\e[39m" "\e[94mCompile Error o.O\e[39m" )
+fi
 # Applying bash colouring to the outputs. (Green for correct, Red for Wrong and Blue for Compile error, and resetting the colour back again)
 
 
