@@ -15,11 +15,13 @@ fi
 
 # This function compares the generated output file with the given expected output file
 function verdict(){
-  difference="$(diff <(cat $outputfile) <(cat ./$answer))"                    #comparing using diff command
-  if [ "$difference" != "" ]
-    then echo 1
-    else echo 0
-  fi
+	DIFF="$(diff <(sed -e '$a\' $outputfile) <(sed -e '$a\' ./$answer))"
+	if [ "$DIFF" != "" ]
+	then
+	  echo 1
+	else
+	  echo 0
+	fi
 }
 
 # This function checks if the extension of the file sent as parameter is C, CPP, Java or Python. (Extension of a file is sent as parameter)
